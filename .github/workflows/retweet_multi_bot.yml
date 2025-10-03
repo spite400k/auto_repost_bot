@@ -1,0 +1,28 @@
+name: Multi-Bot Auto Repost
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run bot
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+          BOT1_ID: ${{ secrets.BOT1_ID }}
+          BOT1_TOKEN: ${{ secrets.BOT1_TOKEN }}
+          BOT2_ID: ${{ secrets.BOT2_ID }}
+          BOT2_TOKEN: ${{ secrets.BOT2_TOKEN }}
+          BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
+        run: python main.py
