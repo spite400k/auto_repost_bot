@@ -2,7 +2,7 @@ name: Multi-Bot Auto Repost
 
 on:
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "* 19 * * *"
   workflow_dispatch:
 
 jobs:
